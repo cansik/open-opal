@@ -122,5 +122,8 @@ class OpalPipeline:
 
     def set_manual_lens_pose(self, position: int):
         ctrl = dai.CameraControl()
+
+        position = max(0, min(255, position))
+
         ctrl.setManualFocus(position)
         self.control_queue.send(ctrl)

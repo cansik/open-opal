@@ -20,7 +20,7 @@ Just download the executable and run it. It currently is only possible to set th
 
 ### Installation
 
-It is recommended to use a modern python version like `3.9` and creating
+It is recommended to use a modern python version like `3.10` and creating
 a [virtual environment](https://docs.python.org/3/library/venv.html). To install all the dependencies, run the following
 command.
 
