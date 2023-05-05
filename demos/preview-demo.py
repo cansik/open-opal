@@ -16,6 +16,7 @@ def main():
     camRgb.setBoardSocket(dai.CameraBoardSocket.RGB)
     camRgb.setResolution(dai.ColorCameraProperties.SensorResolution.THE_4_K)
     camRgb.setVideoSize(3840, 2160)
+    camRgb.setIspScale(3, 2)
     camRgb.setInterleaved(False)
 
     xoutVideo.input.setBlocking(False)
