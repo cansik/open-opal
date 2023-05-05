@@ -59,7 +59,7 @@ class Distribution(distutils.cmd.Command):
             system_name = "windows"
 
         # additional arguments
-        collect_binaries_modules = ["depthai"]
+        collect_binaries_modules = ["depthai", "pyvirtualcam", "cv2"]
         collect_data_modules = []
         collect_all_modules = ["nanogui"]
 

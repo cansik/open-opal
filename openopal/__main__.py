@@ -1,6 +1,9 @@
+from openopal.ControlUI import ControlUI
+
 
 def main():
-    print("hello opal")
+    ui = ControlUI()
+    ui.run()
 
 
 if __name__ == "__main__":
