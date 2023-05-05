@@ -16,6 +16,7 @@ class ControlUI:
         self.gui: Optional[ng.FormHelper] = None
 
         self.pipeline = OpalPipeline()
+        self.pipeline.on_new_frame = self._on_new_frame
 
     def run(self):
         ng.init()
@@ -43,12 +44,21 @@ class ControlUI:
         gc.collect()
         ng.shutdown()
 
+    def _on_new_frame(self, pipeline: OpalPipeline):
+        self.gui.refresh()
+
     def _on_resize(self, *args):
         self.window.set_width(self.screen.width())
         self.window.set_height(self.screen.height())
         self.screen.perform_layout()
 
     def _create_ui(self):
+        def _none_setter(*args):
+            pass
+
         self.gui.add_group("Camera")
+        self.gui.add_string_variable("State", _none_setter, self.pipeline.get_camera_state, editable=False)
+
         self.gui.add_group("Controls")
         self.gui.add_bool_variable("Auto Focus", self.pipeline.set_auto_focus, self.pipeline.get_auto_focus)
+        self.gui.add_int_variable("Lens Position", self.pipeline.set_manual_lens_pose, self.pipeline.get_manual_lens_pos)

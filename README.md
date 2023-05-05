@@ -10,6 +10,14 @@ in the [Luxonis](https://www.luxonis.com/) hardware system, it is possible to us
 MAX)[https://docs.luxonis.com/projects/hardware/en/latest/pages/NG9096max.html#ng9096max]. To read the camera image and
 control the camera parameters it is possible to use the [depthai](https://docs.luxonis.com/en/latest/) python framework.
 
+### Open Opal App
+
+As a quick demonstration, an app has been created that streams the Opal 4k stream into [OBS](https://obsproject.com/).
+Just download the executable and run it. It currently is only possible to set the auto-focus and lens distance.
+
+![Demo](assets/demo.jpg)
+*Basic example that streams the Opal into OBS.*
+
 ### Installation
 
 It is recommended to use a modern python version like `3.9` and creating
@@ -20,12 +28,18 @@ command.
 pip install -r requirements.txt
 ```
 
-### Usage
+### Demos
 
 Many of the demos showed here are following directly the depthai python demos. Usually only the resolution and some
 camera specific parameters have been adapted.
 
-tbd
+#### Preview Demo
+
+This demo just opens an opencv window and displays the 4k stream.
+
+```
+python demos/preview-demo.py
+```
 
 ### About
 
