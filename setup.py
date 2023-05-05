@@ -59,9 +59,9 @@ class Distribution(distutils.cmd.Command):
             system_name = "windows"
 
         # additional arguments
-        collect_binaries_modules = ["depthai", "pyvirtualcam", "cv2"]
+        collect_binaries_modules = ["depthai", "pyvirtualcam"]
         collect_data_modules = []
-        collect_all_modules = ["nanogui"]
+        collect_all_modules = ["nanogui", "cv2"]
 
         additional_files: Dict[str, str] = {}
         additional_files["README.md"] = "."
@@ -78,6 +78,7 @@ class Distribution(distutils.cmd.Command):
             "--name", EXE_NAME,
             "--onefile",
             "--clean",
+            "--icon=assets/open-opal.ico",
             "-y",
             *self._create_cmd("--add-data", additional_files_args),
             *self._create_cmd("--collect-binaries", collect_binaries_modules),
