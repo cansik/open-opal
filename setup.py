@@ -15,7 +15,8 @@ VERSION = "0.1.0"
 required_packages = find_packages(exclude=["*demos.*", "*demos"])
 
 with open('requirements.txt') as f:
-    required = [line for line in f.read().splitlines() if not line.startswith("-")]
+    required = [line for line in f.read().splitlines()
+                if not line.startswith("-") and not line.startswith("git+") and not line.startswith("#")]
 
 
 def zip_dir(dir: Union[Path, str], filename: Union[Path, str]):
@@ -99,7 +100,7 @@ class Distribution(distutils.cmd.Command):
             print("creating zip file...")
             build_system_info = f"{system_name}-{system_arch}".lower()
             release_dir = "release"
-            os.makedirs(release_dir, exist_ok = True)
+            os.makedirs(release_dir, exist_ok=True)
             zip_dir(f"dist/", f"{release_dir}/{EXE_NAME}-{build_system_info}.zip")
 
     def initialize_options(self) -> None:
