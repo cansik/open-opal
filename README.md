@@ -16,7 +16,7 @@ Just download the executable and run it. It currently is only possible to set th
 
 ![Demo](assets/demo.jpg)
 
-*Basic example that streams the Opal into OBS.*
+*Basic example that streams the Opal C1 4K stream into OBS.*
 
 A prebuilt binrary is available from the [releases](https://github.com/cansik/open-opal-c1/releases/tag/v0.1.0).
 
