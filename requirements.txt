@@ -1,4 +1,7 @@
 opencv-python
 depthai
-pyvirtualcam
 nanogui
+
+# install from source on macOS arm64 else install official package
+git+https://github.com/letmaik/pyvirtualcam; platform_system == "Darwin" and platform.machine == "arm64"
+pyvirtualcam; platform_system != "Darwin" or platform.machine != "arm64"
