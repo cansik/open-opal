@@ -20,6 +20,14 @@ Just download the executable and run it. It currently is only possible to set th
 
 A prebuilt binrary is available from the [releases](https://github.com/cansik/open-opal-c1/releases/tag/v0.1.0).
 
+#### Build
+
+To build the app yourself, please [install](#Installation) the dependencies and use the following command.
+
+```
+python setup.py distribute
+```
+
 ### Installation
 
 It is recommended to use a modern python version like `3.10` and creating
