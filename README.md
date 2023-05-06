@@ -4,10 +4,9 @@ Examples to control the [Opal C1](https://opalcamera.com/) from within python. T
 Opal currently does not provide software control of the camera under Windows. Controlling the camera parameters is
 crucial for computer vision applications like in robotics or exhibitions.
 
-Since Opal C1 is based on
-the [LCM48](https://docs.luxonis.com/projects/hardware/en/latest/pages/articles/sensors/imx582.html) sensor, integrated
-in the [Luxonis](https://www.luxonis.com/) hardware system, it is possible to use the camera as an (OAK-1
-MAX)[https://docs.luxonis.com/projects/hardware/en/latest/pages/NG9096max.html#ng9096max]. To read the camera image and
+Since Opal C1 is based on the [LCM48](https://docs.luxonis.com/projects/hardware/en/latest/pages/articles/sensors/imx582.html) sensor, integrated
+in the [Luxonis](https://www.luxonis.com/) hardware system, it is possible to use the camera as an [OAK-1
+MAX](https://docs.luxonis.com/projects/hardware/en/latest/pages/NG9096max.html#ng9096max). To read the camera image and
 control the camera parameters it is possible to use the [depthai](https://docs.luxonis.com/en/latest/) python framework.
 
 ### Open Opal App
@@ -16,7 +15,10 @@ As a quick demonstration, an app has been created that streams the Opal 4k strea
 Just download the executable and run it. It currently is only possible to set the auto-focus and lens distance.
 
 ![Demo](assets/demo.jpg)
+
 *Basic example that streams the Opal into OBS.*
+
+A prebuilt binrary is available from the [releases](https://github.com/cansik/open-opal-c1/releases/tag/v0.1.0).
 
 ### Installation
 

@@ -4,6 +4,7 @@ import sys
 import zipfile
 from pathlib import Path
 from typing import Union, Sequence, Dict
+import os
 
 from setuptools import find_packages, setup
 
@@ -97,7 +98,9 @@ class Distribution(distutils.cmd.Command):
         if self.zip:
             print("creating zip file...")
             build_system_info = f"{system_name}-{system_arch}".lower()
-            zip_dir(f"dist/{NAME}", f"dist/{NAME}-{build_system_info}.zip")
+            release_dir = "release"
+            os.makedirs(release_dir, exist_ok = True)
+            zip_dir(f"dist/", f"{release_dir}/{EXE_NAME}-{build_system_info}.zip")
 
     def initialize_options(self) -> None:
         self.zip = False

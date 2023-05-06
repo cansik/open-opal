@@ -50,15 +50,17 @@ jobs:
           pip install -r dev-requirements.txt
           
           python setup.py distribute --zip ${{ matrix.os.args }}
+          ls -la dist
+          ls -la release
         shell: bash
 
-      # upload dist
+      # upload zip file
       - name: Upload binaries to release
         if: ${{ github.event.inputs.publishReleases == 'true' }}
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: dist/*.zip
+          file: release/*.zip
           tag: ${{ steps.get_version.outputs.v_version }}
           release_name: "Version ${{ steps.get_version.outputs.version }}"
           body: "Prebuilt distribution version ${{ steps.get_version.outputs.version }}."
