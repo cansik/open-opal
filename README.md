@@ -53,4 +53,4 @@ python demos/preview-demo.py
 
 ### About
 
-Developed by cansik 2023
+Created by cansik 2023
