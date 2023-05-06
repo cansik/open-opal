@@ -54,4 +54,4 @@ python demos/preview-demo.py
 
 ### About
 
-Created by cansik 2023
+Created by cansik in 2023 as a proof of concept. There is no connection with Opal Camera.
