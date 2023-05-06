@@ -40,8 +40,9 @@ pip install -r requirements.txt
 
 ### Demos
 
-Many of the demos showed here are following directly the depthai python demos. Usually only the resolution and some
-camera specific parameters have been adapted.
+Many of the demos showed here are following directly the [depthai python examples](https://github.com/luxonis/depthai-python/tree/main/examples). Usually only the resolution and some camera specific parameters have been adapted.
+
+🌿 More demo's are coming soon.
 
 #### Preview Demo
 
