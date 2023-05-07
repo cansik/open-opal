@@ -21,6 +21,8 @@ Just download the executable and run it. It currently is only possible to set ca
 A prebuilt binrary is available from the [releases](https://github.com/cansik/open-opal-c1/releases/tag/v0.1.0).
 To allow pyvirtualcam to run, have a look at its [virtual cameras](https://github.com/letmaik/pyvirtualcam#supported-virtual-cameras) section.
 
+⚠️ *This is just a [proof of concept](https://en.wikipedia.org/wiki/Proof_of_concept) application and in now way intended to be used in production.*
+
 #### Build
 
 To build the app yourself, please [install](#Installation) the dependencies and use the following command.
