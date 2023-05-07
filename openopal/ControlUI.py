@@ -60,5 +60,14 @@ class ControlUI:
         self.gui.add_string_variable("State", _none_setter, self.pipeline.get_camera_state, editable=False)
 
         self.gui.add_group("Controls")
+        self.gui.add_bool_variable("Flip Channels", self.pipeline.set_flip_channels, self.pipeline.get_flip_channels)
+
         self.gui.add_bool_variable("Auto Focus", self.pipeline.set_auto_focus, self.pipeline.get_auto_focus)
         self.gui.add_int_variable("Lens Position", self.pipeline.set_manual_lens_pose, self.pipeline.get_manual_lens_pos)
+
+        self.gui.add_bool_variable("Auto Exposure", self.pipeline.set_auto_exposure, self.pipeline.get_auto_exposure)
+        self.gui.add_int_variable("Exposure", self.pipeline.set_exposure, self.pipeline.get_exposure)
+        self.gui.add_int_variable("ISO", self.pipeline.set_iso_sensitivity, self.pipeline.get_iso_sensitivity)
+
+        self.gui.add_bool_variable("Auto White Balance", self.pipeline.set_auto_white_balance, self.pipeline.get_auto_white_balance)
+        self.gui.add_int_variable("White Balance", self.pipeline.set_white_balance, self.pipeline.get_white_balance)

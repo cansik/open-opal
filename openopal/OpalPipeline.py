@@ -1,6 +1,8 @@
 import threading
+from datetime import timedelta
 from typing import Optional, Sequence, List, Callable
 
+import cv2
 import depthai as dai
 import pyvirtualcam
 
@@ -15,6 +17,15 @@ class OpalPipeline:
         # settings
         self._focus_mode: dai.RawCameraControl.AutoFocusMode = dai.RawCameraControl.AutoFocusMode.AUTO
         self._manual_lens_pos: int = 0
+
+        self._auto_exposure: bool = True
+        self._exposure: timedelta = timedelta(microseconds=30)
+        self._iso_sensitivity: int = 400
+
+        self._auto_white_balance: bool = True
+        self._white_balance: int = 1000
+
+        self._flip_channels: bool = False
 
         # pipeline
         self.pipeline = dai.Pipeline()
@@ -76,22 +87,34 @@ class OpalPipeline:
 
             self.control_queue = device.getInputQueue(self.control_in_name)
             rgb_queue = device.getOutputQueue(name=self.rgb_stream_name, maxSize=4, blocking=False)
-            isp_queue = device.getOutputQueue(self.isp_stream_name, maxSize=1, blocking=False)
+            isp_queue = device.getOutputQueue(name=self.isp_stream_name, maxSize=1, blocking=False)
 
             while self._running_flag:
                 isp_frames: List[dai.ImgFrame] = isp_queue.tryGetAll()
                 for isp_frame in isp_frames:
                     self._manual_lens_pos = isp_frame.getLensPosition()
+                    self._iso_sensitivity = isp_frame.getSensitivity()
+                    self._exposure = isp_frame.getExposureTime()
+                    self._white_balance = isp_frame.getColorTemperature()
 
                 frame = rgb_queue.get().getCvFrame()
+
+                if self._flip_channels:
+                    frame = cv2.cvtColor(frame, cv2.COLOR_RGB2BGR)
+
                 uvc.send(frame)
-                # time.sleep(0.01)
 
                 if self.on_new_frame is not None:
                     self.on_new_frame(self)
 
             print("shutting down camera")
             self._is_camera_running = False
+
+    def get_flip_channels(self) -> bool:
+        return self._flip_channels
+
+    def set_flip_channels(self, value: bool):
+        self._flip_channels = value
 
     def get_camera_state(self) -> str:
         if self._is_camera_running:
@@ -126,4 +149,73 @@ class OpalPipeline:
         position = max(0, min(255, position))
 
         ctrl.setManualFocus(position)
+        self.control_queue.send(ctrl)
+
+    def get_auto_exposure(self) -> bool:
+        return self._auto_exposure
+
+    def set_auto_exposure(self, value: bool):
+        if not self._is_camera_running:
+            return
+
+        print(f"setting auto exposure to: {value}")
+        ctrl = dai.CameraControl()
+        self._auto_exposure = value
+        if value:
+            ctrl.setAutoExposureEnable()
+        else:
+            ctrl.setManualExposure(self._exposure, self._iso_sensitivity)
+        self.control_queue.send(ctrl)
+
+    def get_exposure(self) -> int:
+        return int(self._exposure.total_seconds() * 1000 * 1000)
+
+    def set_exposure(self, value: int):
+        if not self._is_camera_running:
+            return
+
+        ctrl = dai.CameraControl()
+        value = max(1, min(60 * 1000 * 1000, value))
+        exposure = timedelta(microseconds=value)
+        ctrl.setManualExposure(exposure, self._iso_sensitivity)
+        self.control_queue.send(ctrl)
+
+    def get_iso_sensitivity(self) -> int:
+        return self._iso_sensitivity
+
+    def set_iso_sensitivity(self, value: int):
+        if not self._is_camera_running:
+            return
+
+        ctrl = dai.CameraControl()
+        value = max(100, min(1600, value))
+        ctrl.setManualExposure(self._exposure, value)
+        self.control_queue.send(ctrl)
+
+    def get_auto_white_balance(self) -> bool:
+        return self._auto_white_balance
+
+    def set_auto_white_balance(self, value: bool):
+        if not self._is_camera_running:
+            return
+
+        print(f"setting auto white balance to: {value}")
+        ctrl = dai.CameraControl()
+        self._auto_white_balance = value
+        if value:
+            ctrl.setAutoWhiteBalanceMode(dai.RawCameraControl.AutoWhiteBalanceMode.AUTO)
+        else:
+            ctrl.setAutoWhiteBalanceMode(dai.RawCameraControl.AutoWhiteBalanceMode.OFF)
+        self.control_queue.send(ctrl)
+
+    def get_white_balance(self) -> int:
+        return self._white_balance
+
+    def set_white_balance(self, value: int):
+        if not self._is_camera_running:
+            return
+
+        ctrl = dai.CameraControl()
+        value = max(1000, min(12000, value))
+        ctrl.setManualWhiteBalance(value)
         self.control_queue.send(ctrl)
