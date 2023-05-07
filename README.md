@@ -1,4 +1,4 @@
-# Open Opal C1
+# Open Opal
 
 Examples to control the [Opal C1](https://opalcamera.com/) from within python. This repository has been created because
 Opal currently does not provide software control of the camera under Windows. Controlling the camera parameters is
@@ -55,4 +55,4 @@ python demos/preview-demo.py
 
 ### About
 
-Created by cansik in 2023 as a proof of concept. There is no connection with Opal Camera.
+Created by cansik in 2023 as a proof of concept - I am in no way associated with Opal Camera.
