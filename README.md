@@ -9,16 +9,17 @@ in the [Luxonis](https://www.luxonis.com/) hardware system, it is possible to us
 MAX](https://docs.luxonis.com/projects/hardware/en/latest/pages/NG9096max.html#ng9096max). To read the camera image and
 control the camera parameters it is possible to use the [depthai](https://docs.luxonis.com/en/latest/) python framework.
 
-### Open Opal App
+### Open Opal
 
-As a quick demonstration, an app has been created that streams the Opal 4k stream into [OBS](https://obsproject.com/).
-Just download the executable and run it. It currently is only possible to set the auto-focus and lens distance.
+As a quick demonstration, an application has been created that streams the Opal 4k stream into [OBS](https://obsproject.com/).
+Just download the executable and run it. It currently is only possible to set camera parameters like the auto-focus, lens distance, exposure and white balance.
 
 ![Demo](assets/demo.jpg)
 
 *Basic example that streams the Opal C1 4K stream into OBS.*
 
 A prebuilt binrary is available from the [releases](https://github.com/cansik/open-opal-c1/releases/tag/v0.1.0).
+To allow pyvirtualcam to run, have a look at its [virtual cameras](https://github.com/letmaik/pyvirtualcam#supported-virtual-cameras) section.
 
 #### Build
 

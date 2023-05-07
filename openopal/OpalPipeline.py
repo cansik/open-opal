@@ -1,6 +1,6 @@
 import threading
 from datetime import timedelta
-from typing import Optional, Sequence, List, Callable
+from typing import Optional, List, Callable
 
 import cv2
 import depthai as dai
